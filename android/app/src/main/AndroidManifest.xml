@@ -1,9 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
-        android:icon="@drawable/splash_screen"
+        android:name="${applicationName}"
         android:theme="@style/LaunchTheme"
-        android:label="to_do_app_project">
+        android:icon="@mipmap/todologo"
+        android:label="to_do_app_project"
+        android:usesCleartextTraffic="true">
+
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -29,5 +32,6 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
     </application>
 </manifest>
