@@ -1,23 +1,24 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app_project/dialog_utlis.dart';
 import 'package:to_do_app_project/firebase_utils.dart';
 import 'package:to_do_app_project/my_theme.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../model/task.dart';
 import '../../providers/app_config_provider.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/list_provider.dart';
+import '../home_screen.dart';
 
-class TaskDetailsScreen extends StatefulWidget {
+class EditTaskScreen extends StatefulWidget {
   static const String routeName = 'Task_details';
 
   @override
-  State<TaskDetailsScreen> createState() => _TaskDetailsScreenState();
+  State<EditTaskScreen> createState() => _EditTaskScreenState();
 }
 
-class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
+class _EditTaskScreenState extends State<EditTaskScreen> {
   DateTime selectedDate = DateTime.now();
   var formKey = GlobalKey<FormState>();
   var titleController = TextEditingController();
@@ -177,12 +178,17 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
       task.description = descriptionController.text;
       task.dateTime = selectedDate;
       DialogUtils.showLoading(context, AppLocalizations.of(context)!.loading);
-      var authprovider = Provider.of<AuthProvider>(context, listen: false);
+      var authprovider = Provider.of<AuthhProvider>(context, listen: false);
       FirebaseUtils.editTask(task, authprovider.currentUser!.id!).then((value) {
         DialogUtils.hideLoading(context);
         Navigator.pop(context);
-        DialogUtils.showMessage(context, 'todo edited successfully',
-            posActionName: 'OK', isDismissible: true);
+        DialogUtils.showMessage(
+            context, AppLocalizations.of(context)!.todoeditedsuccessfully,
+            title: 'success',
+            isDismissible: true,
+            posActionName: AppLocalizations.of(context)!.ok, posAction: () {
+          Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+        });
       }).timeout(Duration(milliseconds: 500), onTimeout: () {
         print("todo edited successfully");
         Listprovider.getAllTasksFromFireStore(authprovider.currentUser!.id!);

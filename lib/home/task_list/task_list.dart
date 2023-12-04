@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:calendar_timeline/calendar_timeline.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app_project/home/task_list/task_widget.dart';
 import 'package:to_do_app_project/my_theme.dart';
@@ -19,7 +18,7 @@ class _TaskListTabState extends State<TaskListTab> {
   Widget build(BuildContext context) {
     var provider = Provider.of<AppConfigProvider>(context);
     var Listprovider = Provider.of<ListProvider>(context);
-    var authprovider = Provider.of<AuthProvider>(context);
+    var authprovider = Provider.of<AuthhProvider>(context);
 
     if (Listprovider.taskList.isEmpty) {
       Listprovider.getAllTasksFromFireStore(authprovider.currentUser!.id!);

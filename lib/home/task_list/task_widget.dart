@@ -1,12 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app_project/firebase_utils.dart';
 import 'package:to_do_app_project/home/task_list/task_details_screen.dart';
 import 'package:to_do_app_project/my_theme.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:to_do_app_project/providers/list_provider.dart';
+
 import '../../model/task.dart';
 import '../../providers/app_config_provider.dart';
 import '../../providers/auth_provider.dart';
@@ -25,11 +25,11 @@ class _TaskWidgetState extends State<TaskWidget> {
   Widget build(BuildContext context) {
     var provider = Provider.of<AppConfigProvider>(context);
     var Listprovider = Provider.of<ListProvider>(context);
-    var authprovider = Provider.of<AuthProvider>(context);
+    var authprovider = Provider.of<AuthhProvider>(context);
 
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, TaskDetailsScreen.routeName,
+        Navigator.pushNamed(context, EditTaskScreen.routeName,
             arguments: widget.task);
       },
       child: Container(
@@ -43,7 +43,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                 borderRadius: BorderRadius.circular(15),
                 onPressed: (context) {
                   var authprovider =
-                      Provider.of<AuthProvider>(context, listen: false);
+                      Provider.of<AuthhProvider>(context, listen: false);
                   FirebaseUtils.deleteTaskFromFireStore(
                           widget.task, authprovider.currentUser!.id!)
                       .timeout(Duration(milliseconds: 500), onTimeout: () {

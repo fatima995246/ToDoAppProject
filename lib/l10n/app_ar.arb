@@ -6,6 +6,8 @@
   "des": "وصف",
   "entertasktitle": "ادخل عنوان المهمة",
   "entertaskdescription": "ادخل وصف المهمة",
+  "todoaddedsuccessfully": "تم حفظ المهمة",
+  "todoeditedsuccessfully": "تم تعديل المهمة بنجاح",
   "english": "الانجليزية",
   "light": "مضئ",
   "dark": "ليلي",

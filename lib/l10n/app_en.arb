@@ -16,6 +16,8 @@
   "add": "Add",
   "pleaseentertaskdescription": "please Enter Task Description",
   "pleaseentertasktitle": "please Enter Task Title",
+  "todoaddedsuccessfully": "todo added successfully",
+  "todoeditedsuccessfully": "todo edited successfully",
   "edittask": "Edit Task",
   "addnewtask": "Add new Task",
   "savechanges": "Save Changes",

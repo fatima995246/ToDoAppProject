@@ -1,16 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app_project/components/custom_text_form_field.dart';
 import 'package:to_do_app_project/firebase_utils.dart';
 import 'package:to_do_app_project/my_theme.dart';
 import 'package:to_do_app_project/register/register_screen.dart';
+
 import '../dialog_utlis.dart';
 import '../home/home_screen.dart';
 import '../providers/app_config_provider.dart';
 import '../providers/auth_provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = 'login';
@@ -132,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
           return DialogUtils.showMessage(
               context, AppLocalizations.of(context)!.nulluser);
         }
-        var authprovider = Provider.of<AuthProvider>(context, listen: false);
+        var authprovider = Provider.of<AuthhProvider>(context, listen: false);
         authprovider.updateUser(user);
         //hide loading
         DialogUtils.hideLoading(context);
@@ -147,25 +147,15 @@ class _LoginScreenState extends State<LoginScreen> {
       } on FirebaseAuthException catch (e) {
         //hide loading
         DialogUtils.hideLoading(context);
-        //show error message
-        String errorMessage = 'something went wrong';
-        if (e.code == 'user-not-found') {
-          errorMessage = AppLocalizations.of(context)!.nouserfoundforthatemail;
-          DialogUtils.showMessage(context, errorMessage,
+
+        if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
+          DialogUtils.showMessage(context,
+              '${AppLocalizations.of(context)!.nouserfoundforthatemail} or ${AppLocalizations.of(context)!.wrongpasswordprovidedforthatuser}',
               negActionName: AppLocalizations.of(context)!.tryagain,
               negAction: () {
             Navigator.of(context).pushNamed(RegisterScreen.routeName);
           });
           print('No user found for that email.');
-        } else if (e.code == 'wrong-password') {
-          errorMessage =
-              AppLocalizations.of(context)!.wrongpasswordprovidedforthatuser;
-          DialogUtils.showMessage(context, errorMessage,
-              negActionName: AppLocalizations.of(context)!.tryagain,
-              negAction: () {
-            Navigator.of(context).pushNamed(RegisterScreen.routeName);
-          });
-          print('Wrong password provided for that user.');
         }
       } catch (e) {
         DialogUtils.showMessage(context, e.toString(),

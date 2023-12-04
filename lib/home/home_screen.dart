@@ -1,14 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app_project/home/settings/settings_tab.dart';
 import 'package:to_do_app_project/home/task_list/add_task_bottom_sheet.dart';
 import 'package:to_do_app_project/home/task_list/task_list.dart';
 import 'package:to_do_app_project/login/login_screen.dart';
 import 'package:to_do_app_project/my_theme.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:to_do_app_project/providers/auth_provider.dart';
 import 'package:to_do_app_project/providers/list_provider.dart';
+
 import '../providers/app_config_provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<AppConfigProvider>(context);
-    var authprovider = Provider.of<AuthProvider>(context);
+    var authprovider = Provider.of<AuthhProvider>(context);
     var listprovider = Provider.of<ListProvider>(context);
 
     return Scaffold(

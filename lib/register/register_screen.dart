@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app_project/components/custom_text_form_field.dart';
 import 'package:to_do_app_project/dialog_utlis.dart';
@@ -7,7 +8,7 @@ import 'package:to_do_app_project/firebase_utils.dart';
 import 'package:to_do_app_project/login/login_screen.dart';
 import 'package:to_do_app_project/model/my_users.dart';
 import 'package:to_do_app_project/providers/auth_provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../home/home_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -158,7 +159,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             name: nameController.text,
             email: emailController.text);
         //provider declaration outside the build fun
-        var authprovider = Provider.of<AuthProvider>(context, listen: false);
+        var authprovider = Provider.of<AuthhProvider>(context, listen: false);
         authprovider.updateUser(myUser);
         await FirebaseUtils.addUserToFireStore(myUser);
 
